@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lcpatches",
+  "name": "Lost Cities Patches",
+  "description": "Fixes mincellars flag",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["SeemdmAx", "Nick1st"],
+  "credits": "josephcsible for helping us to fix some ASM issues; Windmill-City for the fix we are using",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
