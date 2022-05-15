@@ -20,7 +20,6 @@ import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.JumpInsnNode;
-import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -76,6 +75,36 @@ public class LostCitiesClassTransformer implements IClassTransformer {
 				System.out.println("Found method in LostCitiesTerrainGenerator to transform");
 				AbstractInsnNode targetNode = null;
 				for (AbstractInsnNode instruction : method.instructions.toArray()) {
+					if (instruction.getOpcode() == ILOAD) {
+						if (((VarInsnNode) instruction).var == 10 && instruction.getNext().getOpcode() == IFNE) {
+							System.out.println("Matched");
+							targetNode = instruction.getNext();
+							break;
+						}
+					}
+				}
+				if (targetNode != null) {
+					System.out.println("Target Node valid");
+					InsnList toInsert = new InsnList();
+					toInsert.add(new VarInsnNode(ALOAD, 1));
+					toInsert.add(
+							new MethodInsnNode(INVOKEVIRTUAL, "mcjty/lostcities/dimensions/world/lost/BuildingInfo",
+									"getBuildingType", "()Ljava/lang/String;", false));
+					toInsert.add(new LdcInsnNode("#NODOORS"));
+					toInsert.add(
+							new MethodInsnNode(INVOKEVIRTUAL, "java/lang/String", "contains", "(Ljava/lang/CharSequence;)Z", false));
+					toInsert.add(new JumpInsnNode(IFNE, ((JumpInsnNode) targetNode).label));
+
+					method.instructions.insert(targetNode, toInsert);
+					System.out.println("Transform done!");
+				} else {
+					System.out.println("Something went wrong transforming LostCitiesTerrainGenerator!");
+				}
+			}
+			if (method.name.equals(METHOD) && method.desc.equals(METHOD_DESC)) {
+				System.out.println("Found second method in LostCitiesTerrainGenerator to transform");
+				AbstractInsnNode targetNode = null;
+				for (AbstractInsnNode instruction : method.instructions.toArray()) {
 					if (instruction.getOpcode() == ALOAD) {
 						if (((VarInsnNode) instruction).var == 1 & instruction.getNext().getOpcode() == GETFIELD & instruction.getNext().getNext().getOpcode() == IFLE) {
 							System.out.println("Matched");
@@ -104,7 +133,7 @@ public class LostCitiesClassTransformer implements IClassTransformer {
 			}
 			
 			if (method.name.equals(METHOD) && method.desc.equals(METHOD_DESC)) {
-				System.out.println("Found second method in LostCitiesTerrainGenerator to transform");
+				System.out.println("Found third method in LostCitiesTerrainGenerator to transform");
 				AbstractInsnNode targetNode = null;
 				for (AbstractInsnNode instruction : method.instructions.toArray()) {
 					if (instruction.getOpcode() == ALOAD) {
