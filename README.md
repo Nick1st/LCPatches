@@ -25,16 +25,5 @@ Anyway, feel free to report issues and suggestions on Github!
 
 The mincellars-Patch is based on Windmill-City's pull request [Fix min/maxcellars by Windmill-City · Pull Request #359 · McJtyMods/LostCities](https://github.com/McJtyMods/LostCities/pull/359).
 
----
-
-### Server Needed?
-You need a Minecraft server to play with your friends but it's just too much work to setup one on your own?
-No problem, just rent an ready-to-use server and start playing!
-
-Just click on the image below and use code `Nick1st` to get 25% off your first month!
-
-[![Bisect Hosting Banner](https://www.bisecthosting.com/partners/custom-banners/ec0fce5d-e8f8-4d46-89cf-0d05a1000594.png)](https://bisecthosting.com/nick1st)
-
-**Disclaimer**: If you choose to make a purchase after clicking this link, I may receive a commission at no additional cost to you. Thank you for your support!
 
  
